@@ -10,10 +10,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"practice/crawler_distributed/config"
 	"time"
 )
 
-var rateLimiter = time.Tick(100 * time.Millisecond)
+var rateLimiter = time.Tick(time.Second / config.QPS)
 
 func Fetch(url string) ([]byte, error) {
 

@@ -18,10 +18,10 @@ var emailRe = regexp.MustCompile(`<li><span class="dot-ico4">电子邮件：</sp
 var faxRe = regexp.MustCompile(`<li><span class="dot-ico5 dot-txt1">邮&nbsp编：</span><em>([^<]*)</em></li>`)
 var addrRe = regexp.MustCompile(`<li><span class="dot-ico6 dot-txt1">地&nbsp址：</span><em>([^<]*)</em></li>`)
 
-func ParserDoctorContent(contents []byte, name string, id string, url string) engine.ParserResult {
+func parserDoctorContent(contents []byte, d *DoctorParser) engine.ParserResult {
 
 	doctor := model.Doctor{
-		Name: name,
+		Name: d.UserName,
 	}
 
 	doctor.Zhicheng = extract(contents, zhichengRe)
@@ -36,10 +36,10 @@ func ParserDoctorContent(contents []byte, name string, id string, url string) en
 	doctor.Address = extract(contents, addrRe)
 
 	item := engine.Item{
-		Id:      id,
+		Id:      d.Id,
 		Type:    "doctorInfo",
 		Payload: doctor,
-		Url:     url,
+		Url:     d.Url,
 	}
 
 	fmt.Printf("Doctor info : %v \n", doctor)
@@ -58,4 +58,26 @@ func extract(contents []byte, re *regexp.Regexp) string {
 	}
 
 	return ""
+}
+
+type DoctorParser struct {
+	UserName string
+	Id       string
+	Url      string
+}
+
+func (d *DoctorParser) Parse(contents []byte) engine.ParserResult {
+	return parserDoctorContent(contents, d)
+}
+
+func (d *DoctorParser) Serialize() (name string, args interface{}) {
+	return "DoctorParser", &d
+}
+
+func NewDoctorParser(name string, id string, url string) *DoctorParser {
+	return &DoctorParser{
+		UserName: name,
+		Id:       id,
+		Url:      url,
+	}
 }

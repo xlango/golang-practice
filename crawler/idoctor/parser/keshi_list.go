@@ -20,8 +20,8 @@ func ParserKeshiList(contents []byte) engine.ParserResult {
 		log.Printf("Keshi : %v \n", string(m[2]))
 		result.Requests = append(
 			result.Requests, engine.Request{
-				Url:        "https://ysk.99.com.cn" + string(m[1]),
-				ParserFunc: ParserDoctor,
+				Url:    "https://ysk.99.com.cn" + string(m[1]),
+				Parser: engine.NewFuncParser(ParserDoctor, "ParserDoctor"),
 			})
 
 		//limit--

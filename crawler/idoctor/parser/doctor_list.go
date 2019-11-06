@@ -19,10 +19,8 @@ func ParserDoctor(contents []byte) engine.ParserResult {
 		log.Printf("Doctor : %v \n", name)
 		result.Requests = append(
 			result.Requests, engine.Request{
-				Url: "https://ysk.99.com.cn" + string(m[1]),
-				ParserFunc: func(c []byte) engine.ParserResult {
-					return ParserDoctorContent(c, name, string(m[2]), "https://ysk.99.com.cn"+string(m[1]))
-				},
+				Url:    "https://ysk.99.com.cn" + string(m[1]),
+				Parser: NewDoctorParser(name, string(m[2]), "https://ysk.99.com.cn"+string(m[1])),
 			})
 	}
 

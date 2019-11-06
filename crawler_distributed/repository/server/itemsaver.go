@@ -1,19 +1,30 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"gopkg.in/olivere/elastic.v5"
 	"log"
+	"practice/crawler_distributed/config"
 	"practice/crawler_distributed/repository"
 	"practice/crawler_distributed/rpcsupport"
 )
 
+var port = flag.Int("port", 0,
+	"the port for me to listen on")
+
 func main() {
-	log.Fatal(serveRpc(":1234", "crawler_dist"))
+	flag.Parse()
+	if *port == 0 {
+		fmt.Println("must specify a port")
+		return
+	}
+	log.Fatal(serveRpc(fmt.Sprintf(":%d", *port), config.EsIndex))
 }
 
 func serveRpc(host, index string) error {
 	client, err := elastic.NewClient(
-		elastic.SetURL("http://192.168.10.222:9200"),
+		elastic.SetURL(config.EsUrl),
 		elastic.SetSniff(false),
 	)
 	if err != nil {
@@ -24,7 +35,6 @@ func serveRpc(host, index string) error {
 		&repository.ItemSaverService{
 			Client: client,
 			Index:  index,
-			//Index:"crawler_dist",
 		})
 	return nil
 }

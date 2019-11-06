@@ -5,7 +5,7 @@ import (
 	"practice/crawler/fetcher"
 )
 
-func work(r Request) (ParserResult, error) {
+func Work(r Request) (ParserResult, error) {
 
 	log.Printf("Fetching %s \n", r.Url)
 	body, err := fetcher.Fetch(r.Url)
@@ -14,7 +14,7 @@ func work(r Request) (ParserResult, error) {
 		return ParserResult{}, err
 	}
 
-	parserResult := r.ParserFunc(body)
+	parserResult := r.Parser.Parse(body)
 
 	return parserResult, nil
 }
