@@ -8,22 +8,13 @@ import (
 	"practice/crawler/engine"
 )
 
-func save(item engine.Item) (err error) {
-	client, err := elastic.NewClient(
-		elastic.SetURL("http://192.168.10.222:9200"),
-		elastic.SetSniff(false),
-	)
-	if err != nil {
-		log.Printf("[error]elastic client create failed \n")
-		return err
-	}
-
+func Save(client *elastic.Client, index string, item engine.Item) (err error) {
 	if item.Type == "" {
 		return errors.New("Must supply type")
 	}
 
 	indexService := client.Index().
-		Index("idoctor").
+		Index(index).
 		Type(item.Type).
 		BodyJson(item)
 
@@ -38,7 +29,17 @@ func save(item engine.Item) (err error) {
 	return nil
 }
 
-func ItemSave() chan engine.Item {
+func ItemSave(index string) (chan engine.Item, error) {
+
+	client, err := elastic.NewClient(
+		elastic.SetURL("http://192.168.10.222:9200"),
+		elastic.SetSniff(false),
+	)
+	if err != nil {
+		log.Printf("[error]elastic client create failed \n")
+		return nil, err
+	}
+
 	out := make(chan engine.Item)
 
 	go func() {
@@ -48,12 +49,12 @@ func ItemSave() chan engine.Item {
 			log.Printf("Item saver : got item #%d : %v", itemCount, item)
 			itemCount++
 
-			err := save(item)
+			err := Save(client, index, item)
 			if err != nil {
 				log.Printf("Item saver %v error : %v", item, err)
 			}
 		}
 	}()
 
-	return out
+	return out, nil
 }

@@ -57,10 +57,15 @@ import (
 //}
 
 func main() {
+	itemChan, err := repository.ItemSave("idoctor")
+	if err != nil {
+		panic(err)
+	}
+
 	e := engine.ConcurrentEngine{
 		Scheduler:   &scheduler.QueueScheduler{},
 		WorkerCount: 10,
-		ItemChan:    repository.ItemSave(),
+		ItemChan:    itemChan,
 	}
 
 	e.Run(engine.Request{

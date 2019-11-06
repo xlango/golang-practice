@@ -9,6 +9,15 @@ import (
 )
 
 func TestSave(t *testing.T) {
+
+	client, err := elastic.NewClient(
+		elastic.SetURL("http://192.168.10.222:9200"),
+		elastic.SetSniff(false),
+	)
+	if err != nil {
+		panic(err)
+	}
+
 	doctor := model.Doctor{
 		Name:       "test1",
 		Zhicheng:   "test1",
@@ -30,20 +39,14 @@ func TestSave(t *testing.T) {
 		Payload: doctor,
 	}
 
-	err := save(item)
+	const index = "idoctor_test"
+	err = Save(client, index, item)
 
 	if err != nil {
 		panic(err)
 	}
 
-	client, err := elastic.NewClient(
-		elastic.SetURL("http://192.168.10.222:9200"),
-		elastic.SetSniff(false),
-	)
-	if err != nil {
-		panic(err)
-	}
-	result, err := client.Get().Index("idoctor").Type(item.Type).Id(item.Id).Do(context.Background())
+	result, err := client.Get().Index(index).Type(item.Type).Id(item.Id).Do(context.Background())
 
 	//var property  model.Property
 	//err = json.Unmarshal(
