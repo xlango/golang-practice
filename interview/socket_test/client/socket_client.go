@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/astaxie/beego/logs"
 	"net"
 	"os"
 )
@@ -79,10 +80,21 @@ func main() {
 	for {
 		//result, err := ioutil.ReadAll(conn)
 		b := make([]byte, 1024)
-		n, _ := conn.Read(b)
-		a := make([]byte, n)
-		a = b[:n]
-		fmt.Println(string(a))
+		n, err := conn.Read(b)
+		if err != nil {
+			logs.Error(err)
+			return
+		}
+		reseiveMsg := make([]byte, n)
+		reseiveMsg = b[:n]
+		msg := Msg{}
+		json.Unmarshal(reseiveMsg, &msg)
+		if msg.Command == "commit" || msg.Command == "rollback" {
+			fmt.Println(msg.Command)
+			conn.Close()
+			return
+		}
+
 	}
 }
 

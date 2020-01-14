@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/astaxie/beego/logs"
 	"net"
 	"os"
 )
@@ -44,14 +45,20 @@ type Msg struct {
 
 func handleClient(conn net.Conn) {
 	//defer conn.Close()
+
 	for {
 		b := make([]byte, 1024)
-		n, _ := conn.Read(b)
-		a := make([]byte, n)
-		a = b[:n]
-		fmt.Println(string(a))
+		n, err := conn.Read(b)
+		if err != nil {
+			//客户端端口连接（异常断开或完成事务）
+			logs.Info("连接已断开", err)
+			return
+		}
+		receiveMsg := make([]byte, n)
+		receiveMsg = b[:n]
+		fmt.Println(string(receiveMsg))
 		msg := Msg{}
-		json.Unmarshal(a, &msg)
+		json.Unmarshal(receiveMsg, &msg)
 		fmt.Printf("gid:%v,type:%v,command:%v,count:%v,isEnd:%v \n", msg.GroupId, msg.Type, msg.Command, msg.TxCount, msg.IsEnd)
 
 		if msg.Command == "create" {
@@ -60,8 +67,8 @@ func handleClient(conn net.Conn) {
 			channelGroup[msg.GroupId] = make([]net.Conn, 0)
 		} else if msg.Command == "add" {
 			//加入事务组
-			fmt.Printf("%T===%v===%d", typeMap[msg.GroupId], typeMap[msg.GroupId], len(typeMap[msg.GroupId]))
 			typeMap[msg.GroupId] = append(typeMap[msg.GroupId], msg.Type)
+			fmt.Printf("%T===%v===%d", typeMap[msg.GroupId], typeMap[msg.GroupId], len(typeMap[msg.GroupId]))
 
 			channelGroup[msg.GroupId] = append(channelGroup[msg.GroupId], conn)
 
@@ -95,7 +102,19 @@ func handleClient(conn net.Conn) {
 func sendResult(groupId string, rs []byte) {
 	for _, conn := range channelGroup[groupId] {
 		conn.Write(rs)
+		//conn.Close()
 	}
+
+	//通知commit/rollback后解除该事务
+	delete(typeMap, groupId)
+	delete(isEndMap, groupId)
+	delete(countMap, groupId)
+
+	//for _, conn := range channelGroup[groupId] {
+	//	conn.Close()
+	//}
+
+	delete(channelGroup, groupId)
 
 }
 

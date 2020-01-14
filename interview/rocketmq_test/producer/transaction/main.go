@@ -81,7 +81,7 @@ func (dl *DemoListener) CheckLocalTransaction(msg primitive.MessageExt) primitiv
 func main() {
 	p, _ := rocketmq.NewTransactionProducer(
 		NewDemoListener(),
-		producer.WithNameServer([]string{"127.0.0.1:9876"}),
+		producer.WithNameServer([]string{"192.168.10.36:9876"}),
 		producer.WithRetry(1),
 	)
 	err := p.Start()
