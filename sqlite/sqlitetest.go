@@ -16,7 +16,8 @@ type User struct {
 }
 
 func main() {
-	db, err := gorm.Open("sqlite3", "sqlite/gorm.db?_auth_user=admin&_auth_pass=admin&_auth_crypt=sha1")
+	//db, err := gorm.Open("sqlite3", "sqlite/gorm.db?_auth_user=admin&_auth_pass=admin&_auth_crypt=sha1")
+	db, err := gorm.Open("sqlite3", "file:sqlite/test.s3db?_auth&_auth_user=admin&_auth_pass=admin&_auth_crypt=sha1")
 	if err != nil {
 		log.Error(err.Error())
 	}
