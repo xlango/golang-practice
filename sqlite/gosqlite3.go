@@ -3,14 +3,16 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/mattn/go-sqlite3"
+	//_ "github.com/mattn/go-sqlite3"
+	_ "github.com/xeodou/go-sqlcipher"
 	"log"
 )
 
 func main() {
 	///os.Remove("sqlite/test.s3db")
 
-	db, err := sql.Open("sqlite3", "file:sqlite/test.s3db?_auth&_auth_user=admin&_auth_pass=admin")
+	db, err := sql.Open("sqlite3", "file:test.s3db?_auth&_auth_user=admin&_auth_pass=admin&_auth_crypt=sha1")
+	//db, err := sql.Open("sqlite3", "file:sqlite/test.s3db?_key=password")
 
 	//db, err := sql.Open("sqlite3" "file:sqlite/test.s3db")
 	if err != nil {
@@ -65,6 +67,7 @@ func main() {
 	}
 
 	stmt, err = db.Prepare("select name from foo where id = ?")
+	//stmt, err = db.Prepare("SELECT auth_user_add('admin','admin',1)")
 	if err != nil {
 		log.Fatal(err)
 	}
