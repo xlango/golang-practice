@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func main() {
+func main1() {
 	file, err := os.Open("test/maze.in")
 	if err != nil {
 		panic(err)

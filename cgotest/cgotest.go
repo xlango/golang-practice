@@ -1,19 +1,19 @@
 package main
 
 /*
-#include <stdio.h>
-#include <stdlib.h>
-
-void myprint(char* s) {
-	printf("%s\n", s);
-}
+void SayHello(_GoString_ s);
 */
 import "C"
 
-import "unsafe"
+import (
+"fmt"
+)
 
 func main() {
-	cs := C.CString("Hello from stdio\n")
-	C.myprint(cs)
-	C.free(unsafe.Pointer(cs))
+	C.SayHello("Hello, World\n")
+}
+
+//export SayHello
+func SayHello(s string) {
+	fmt.Print(s)
 }
