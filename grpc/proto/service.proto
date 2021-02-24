@@ -1,0 +1,27 @@
+syntax = "proto3";
+package proto;
+option go_package = "github.com/yourorg/yourprotos/gen/go/proto";
+
+import "google/api/annotations.proto";
+
+message StringMessage {
+    repeated StringSingle ss = 1;
+}
+
+message StringSingle {
+    string id = 1;
+    string name = 2;
+}
+
+message Empty {
+
+}
+
+service MaxSize {
+  rpc Echo(Empty) returns (stream StringMessage) {
+      option (google.api.http) = {
+          post: "/v1/example/echo"
+          body: "*"
+      };
+   };
+}
