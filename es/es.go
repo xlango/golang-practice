@@ -1,13 +1,10 @@
 package main
 
-
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/olivere/elastic.v6" //这里使用的是版本5，最新的是6，有改动
-	"log"
-	"os"
 	"reflect"
 )
 
@@ -22,11 +19,19 @@ type Employee struct {
 	Interests []string `json:"interests"`
 }
 
+type TimeInfo struct {
+	Time  string `json:"time"`
+}
+
 //初始化
 func init() {
-	errorlog := log.New(os.Stdout, "APP", log.LstdFlags)
+	//errorlog := log.New(os.Stdout, "APP", log.LstdFlags)
 	var err error
-	client, err = elastic.NewClient(elastic.SetErrorLog(errorlog), elastic.SetURL(host))
+	client, err = elastic.NewClient(
+		elastic.SetURL(host),
+		elastic.SetHealthcheck(false),
+		elastic.SetSniff(false),
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -189,6 +194,7 @@ func list(size,page int) {
 		fmt.Printf("param error")
 		return
 	}
+
 	res,err := client.Search("megacorp").
 		Type("employee").
 		Size(size).
@@ -215,7 +221,78 @@ func main() {
 	//create()
 	//delete()
 	//update()
-	gets()
-	query()
-	list(10,1)
+	//gets()
+	//query()
+	//list(10,1)
+
+	//res,_ := client.Search("megacorp").
+	//	Type("employee").
+	//	Size(10).
+	//	From(9999).
+	//	Sort("age",true).
+	//	Do(context.Background())
+	//var typ Employee
+	//for _, item := range res.Each(reflect.TypeOf(typ)) { //从搜索结果中取数据的方法
+	//	t := item.(Employee)
+	//	fmt.Printf("%#v\n", t)
+	//}
+
+	//for i:=20;i<30 ;i++  {
+	//	itoa := strconv.Itoa(i)
+	//	e1 := Employee{"Jane"+itoa, "Smith"+itoa, 32+i, "I like to collect rock albums"+itoa, []string{"music"+itoa}}
+	//	put1, err := client.Index().
+	//		Index("megacorp").
+	//		Type("employee").
+	//		Id(fmt.Sprintf("%d",time.Now().UnixNano())).
+	//		BodyJson(e1).
+	//		Do(context.Background())
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//	fmt.Printf("Indexed tweet %s to index s%s, type %s\n", put1.Id, put1.Index, put1.Type)
+	//}
+
+	res,_ := client.Search("megacorp").
+		Type("employee").
+		//Sort("age",true).
+		Size(10000).
+		Do(context.Background())
+	var typ Employee
+	eachs := res.Each(reflect.TypeOf(typ))
+	for _, item := range eachs { //从搜索结果中取数据的方法
+		t := item.(Employee)
+		fmt.Printf("%#v\n", t)
+	}
+
+	//mu := make(map[string]interface{})
+	//mu["front"] = "10.34.4.10"
+	//mu["back"] = "10.34.4.11"
+	//data := make(map[string]interface{})
+	//data["terminal.client_ip"] = mu
+	//
+	//e1 := AssetChangesInfo{
+	//	Time:       time.Now().Unix(),
+	//	Person:     "xx",
+	//	Group:      "adsf",
+	//	HostName:   "aaasdf",
+	//	ClientIp:   "10.34.4.11",
+	//	Details: data,
+	//}
+	//_, err := client.Index().
+	//	Index("mutation").
+	//	Type("doc").
+	//	BodyJson(e1).
+	//	Do(context.Background())
+	//if err != nil {
+	//	panic(err)
+	//}
+}
+
+type AssetChangesInfo struct {
+	Time int64 `json:"time"`  //时间
+	Person string `json:"person"` //责任人
+	Group string `json:"group"`   //部门
+	HostName string `json:"host_name"` //计算机名称
+	ClientIp string `json:"client_ip"` //终端IP
+	Details map[string]interface{} `json:"details"` //变更信息
 }

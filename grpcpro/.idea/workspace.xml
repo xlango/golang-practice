@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="37a531f3-99a8-4c04-9781-42ef42d2fe81" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go Application" />
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/usr/local/go" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1pSOtSMBHFkXEhThbdXwHGmGzsS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cert" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cert" />
+      <recent name="$PROJECT_DIR$/pbfiles" />
+      <recent name="$PROJECT_DIR$/keys/cert" />
+      <recent name="$PROJECT_DIR$/keys/double" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/keys/single" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build grpcpro">
+    <configuration name="go build grpcpro" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="grpcpro" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/server.go" />
+      <package value="grpcpro" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build httpserver.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="grpcpro" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/httpserver.go" />
+      <package value="grpcpro" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Build.go build grpcpro" />
+      <item itemvalue="Go Build.go build httpserver.go" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build grpcpro" />
+        <item itemvalue="Go Build.go build httpserver.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+    <proxy>https://mirrors.aliyun.com/goproxy</proxy>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="454" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615348012193">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state x="454" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.28.1918.860@0.28.1918.860" timestamp="1615348012193" />
+    <state x="647" y="79" width="613" height="765" key="#go_build_grpcpro" timestamp="1615347855795">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state x="647" y="79" width="613" height="765" key="#go_build_grpcpro/0.28.1918.860@0.28.1918.860" timestamp="1615347855795" />
+    <state x="647" y="79" width="613" height="765" key="#go_build_grpcpro_(1)" timestamp="1615347915581">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state x="647" y="79" width="613" height="765" key="#go_build_grpcpro_(1)/0.28.1918.860@0.28.1918.860" timestamp="1615347915581" />
+    <state width="1870" height="270" key="GridCell.Tab.0.bottom" timestamp="1615364552345">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1092" height="214" key="GridCell.Tab.0.bottom/0.28.1140.748@0.28.1140.748" timestamp="1615258436239" />
+    <state width="1870" height="270" key="GridCell.Tab.0.bottom/0.28.1918.860@0.28.1918.860" timestamp="1615364552345" />
+    <state width="1870" height="270" key="GridCell.Tab.0.center" timestamp="1615364552344">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1092" height="214" key="GridCell.Tab.0.center/0.28.1140.748@0.28.1140.748" timestamp="1615258436238" />
+    <state width="1870" height="270" key="GridCell.Tab.0.center/0.28.1918.860@0.28.1918.860" timestamp="1615364552344" />
+    <state width="1870" height="270" key="GridCell.Tab.0.left" timestamp="1615364552344">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1092" height="214" key="GridCell.Tab.0.left/0.28.1140.748@0.28.1140.748" timestamp="1615258436237" />
+    <state width="1870" height="270" key="GridCell.Tab.0.left/0.28.1918.860@0.28.1918.860" timestamp="1615364552344" />
+    <state width="1870" height="270" key="GridCell.Tab.0.right" timestamp="1615364552345">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1092" height="214" key="GridCell.Tab.0.right/0.28.1140.748@0.28.1140.748" timestamp="1615258436239" />
+    <state width="1870" height="270" key="GridCell.Tab.0.right/0.28.1918.860@0.28.1918.860" timestamp="1615364552345" />
+    <state width="1870" height="270" key="GridCell.Tab.1.bottom" timestamp="1615364552347">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1870" height="259" key="GridCell.Tab.1.bottom/0.28.1140.748@0.28.1140.748" timestamp="1615258436134" />
+    <state width="1870" height="270" key="GridCell.Tab.1.bottom/0.28.1918.860@0.28.1918.860" timestamp="1615364552347" />
+    <state width="1870" height="270" key="GridCell.Tab.1.center" timestamp="1615364552346">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1870" height="259" key="GridCell.Tab.1.center/0.28.1140.748@0.28.1140.748" timestamp="1615258436132" />
+    <state width="1870" height="270" key="GridCell.Tab.1.center/0.28.1918.860@0.28.1918.860" timestamp="1615364552346" />
+    <state width="1870" height="270" key="GridCell.Tab.1.left" timestamp="1615364552346">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1870" height="259" key="GridCell.Tab.1.left/0.28.1140.748@0.28.1140.748" timestamp="1615258436131" />
+    <state width="1870" height="270" key="GridCell.Tab.1.left/0.28.1918.860@0.28.1918.860" timestamp="1615364552346" />
+    <state width="1870" height="270" key="GridCell.Tab.1.right" timestamp="1615364552347">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state width="1870" height="259" key="GridCell.Tab.1.right/0.28.1140.748@0.28.1140.748" timestamp="1615258436133" />
+    <state width="1870" height="270" key="GridCell.Tab.1.right/0.28.1918.860@0.28.1918.860" timestamp="1615364552347" />
+    <state x="455" y="93" width="1007" height="737" key="SettingsEditor" timestamp="1615176943829">
+      <screen x="0" y="28" width="1918" height="860" />
+    </state>
+    <state x="455" y="93" width="1007" height="737" key="SettingsEditor/0.28.1918.860@0.28.1918.860" timestamp="1615176943829" />
+  </component>
+</project>
